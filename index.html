@@ -1,1 +1,219 @@
-<h>hi</h>
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Node | Сайт</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FFE3BC;
+            --bg: #221E17;
+            --surface: #2D2820;
+            --on-surface: #E6E1D9;
+            --outline: #4F4539;
+            --error: #FFB4AB;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg);
+            color: var(--on-surface);
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            padding-top: 100px; /* Отступ под хедер */
+        }
+
+        /* Адаптивный хедер */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Центр по умолчанию */
+            border-bottom: 1px solid var(--outline);
+            background: rgba(34, 30, 23, 0.95);
+            backdrop-filter: blur(12px);
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Состояние при скролле */
+        header.scrolled {
+            height: 60px;
+            justify-content: flex-start; /* Уходит влево */
+            padding: 0 24px;
+        }
+
+        .logo-svg {
+            width: 140px;
+            height: auto;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        header.scrolled .logo-svg {
+            width: 90px; /* Уменьшается */
+        }
+
+        .container {
+            max-width: 750px;
+            margin: 0 auto;
+            padding: 20px 15px 60px;
+        }
+
+        section {
+            margin-top: 24px;
+            background: var(--surface);
+            border-radius: 24px;
+            padding: 24px;
+            border: 1px solid var(--outline);
+        }
+
+        h2 {
+            color: var(--primary);
+            margin-bottom: 16px;
+            font-size: 20px;
+            font-weight: 500;
+        }
+
+        h3 {
+            margin: 15px 0 8px;
+            color: var(--primary);
+            font-size: 16px;
+        }
+
+        .rule-item {
+            margin-bottom: 12px;
+            padding-left: 14px;
+            border-left: 2px solid var(--outline);
+            font-size: 14px;
+        }
+
+        .important { color: var(--error); font-weight: 700; }
+
+        .btn-link {
+            display: inline-flex;
+            background: var(--primary);
+            color: var(--bg);
+            padding: 12px 24px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: 0.2s ease;
+        }
+
+        .btn-link:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        .reasons-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 10px;
+        }
+
+        .reason-card {
+            background: rgba(255, 227, 188, 0.03);
+            padding: 15px;
+            border-radius: 16px;
+            border: 1px solid var(--outline);
+        }
+
+        .reason-card ul { list-style: none; font-size: 13px; opacity: 0.9; }
+
+        @media (max-width: 600px) {
+            .reasons-grid { grid-template-columns: 1fr; }
+            header { padding: 0 20px; }
+            header.scrolled { padding: 0 15px; }
+        }
+    </style>
+</head>
+<body>
+
+<header id="main-header">
+    <img src="assets/logo.svg" alt="Node" class="logo-svg">
+</header>
+
+<div class="container">
+    
+    <section>
+        <h2>🔗 Сетка чатов</h2>
+        <a href="https://t.me/addlist/DIg-BioodnBhMGFi" class="btn-link" target="_blank">ПРИСОЕДИНИТЬСЯ К NODE</a>
+    </section>
+
+    <section>
+        <h2>⭐️ Причины для вноса</h2>
+        <div class="reasons-grid">
+            <div class="reason-card">
+                <h3 style="color: #FF8A80;">🔴 Скам (+1)</h3>
+                <ul>
+                    <li>• Взлом (ТГ / Роблокс)</li>
+                    <li>• Скам (Вещи / Валюта / NFT)</li>
+                    <li>• Фейк админа или гаранта</li>
+                    <li>• Кража пруфов / чеков</li>
+                </ul>
+            </div>
+            <div class="reason-card">
+                <h3 style="color: #FFD54F;">🟡 Подозрения (0)</h3>
+                <ul>
+                    <li>• Отказ от гаранта / Свой НН</li>
+                    <li>• Сомнительные услуги / Аренда</li>
+                    <li>• Накрутка отзывов / пруфов</li>
+                    <li>• Просьба о взломе</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h2>💬 Node | Оффтоп</h2>
+        <div class="rule-item">Свободное общение на любые темы.</div>
+        <div class="rule-item">
+            <span class="important">ЗАПРЕЩЕНО:</span> ЦП, расчленёнка, ЗСГ и слив данных — <b>бан.</b>
+        </div>
+        <div class="rule-item">За сильный спам (≥10 сообщений / 5 сек) — мут.</div>
+    </section>
+
+    <section>
+        <h2>📥 Предложка (Слив скамеров)</h2>
+        <div class="rule-item">Чат для слива скамеров и мутных личностей.</div>
+        <div class="rule-item">Закрывается на ночь и открывается утром.</div>
+        <div class="rule-item">Оффтоп карается предупреждением (2 варна = мут на 24 часа).</div>
+    </section>
+
+    <section>
+        <h2>⚖️ Правила чата "Суд"</h2>
+        <div class="rule-item">Уважение к судьям. Хамство лишает права на пересмотр.</div>
+        <div class="rule-item">Предоставляйте полные видео-доказательства невиновности.</div>
+        <div class="rule-item">
+            <span class="important">КОНТЕНТ 18+:</span> Использование медиа 18+ — риск бана.
+        </div>
+    </section>
+
+    <section>
+        <h2>👑 Персонал</h2>
+        <div class="rule-item">Для вступления в команду: чистая репутация и личное собеседование.</div>
+    </section>
+
+</div>
+
+<script>
+    const header = document.getElementById('main-header');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
+</script>
+
+</body>
+</html>
