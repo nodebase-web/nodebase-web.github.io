@@ -3,225 +3,405 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NODE BASE | Official</title>
+    <title>NODE BASE — официальный сайт</title>
+    <meta name="description" content="Node Base — сообщество по борьбе со скамом. База данных скамеров, правила чатов, обучение администрации.">
+    <meta property="og:title" content="NODE BASE">
+    <meta property="og:description" content="Сообщество по борьбе со скамом. База данных мошенников, правила и обучение администрации.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://node.twinkvibe.gay">
+    <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #FFE3BC;
-            --bg: #221E17;
+            --primary-bg: rgba(255, 227, 188, 0.06);
+            --bg: #1A1712;
             --surface: #2D2820;
             --on-surface: #E6E1D9;
+            --text-dim: #A0988A;
             --outline: #4F4539;
             --error: #FFB4AB;
+            --scam: #FF8A80;
+            --warn: #FFD54F;
+            --radius: 20px;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        html { scroll-behavior: smooth; }
+
         body {
-            background-color: var(--bg);
+            background: var(--bg);
             color: var(--on-surface);
             font-family: 'Roboto', sans-serif;
             line-height: 1.6;
-            padding-top: 100px;
+            padding-top: 82px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--primary);
+            outline-offset: 3px;
+            border-radius: 4px;
         }
 
         header {
             position: fixed;
             top: 0; left: 0; right: 0;
-            height: 100px;
+            height: 82px;
             padding: 0 40px;
             display: flex;
             align-items: center;
-            justify-content: center;
+            justify-content: space-between;
             border-bottom: 1px solid var(--outline);
-            background: rgba(34, 30, 23, 0.95);
-            backdrop-filter: blur(12px);
+            background: rgba(26, 23, 18, 0.96);
+            backdrop-filter: blur(16px);
             z-index: 1000;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: height 0.3s ease;
         }
 
-        header.scrolled {
-            height: 60px;
-            justify-content: flex-start;
-            padding: 0 24px;
-        }
+        header.scrolled { height: 58px; }
 
         .logo-svg {
-            width: 140px;
+            width: 120px;
             height: auto;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: width 0.3s ease;
         }
 
-        header.scrolled .logo-svg {
-            width: 90px;
+        header.scrolled .logo-svg { width: 80px; }
+
+        nav { display: flex; gap: 4px; }
+
+        .nav-link {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
+            padding: 6px 14px;
+            border-radius: 20px;
+            transition: 0.2s;
+            white-space: nowrap;
+        }
+
+        .nav-link:hover {
+            color: var(--primary);
+            background: var(--primary-bg);
         }
 
         .container {
-            max-width: 750px;
+            max-width: 740px;
             margin: 0 auto;
-            padding: 20px 15px 60px;
+            padding: 16px 12px 40px;
+            flex: 1;
         }
 
         section {
-            margin-top: 24px;
+            margin-top: 20px;
             background: var(--surface);
-            border-radius: 24px;
+            border-radius: var(--radius);
             padding: 24px;
             border: 1px solid var(--outline);
+            transition: border-color 0.2s;
         }
 
-        h2 {
+        section:target { border-color: var(--primary); }
+
+        .section-title {
             color: var(--primary);
-            margin-bottom: 16px;
             font-size: 20px;
-            font-weight: 500;
+            font-weight: 600;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        h3 {
-            margin: 15px 0 8px;
-            color: var(--primary);
-            font-size: 16px;
-        }
-
-        .rule-item {
-            margin-bottom: 12px;
-            padding-left: 14px;
-            border-left: 2px solid var(--outline);
-            font-size: 14px;
-            white-space: pre-line; /* Чтобы сохранить переносы строк Мисы */
-        }
-
-        .important { color: var(--error); font-weight: 700; }
-
-        .btn-link {
-            display: inline-flex;
-            background: var(--primary);
-            color: var(--bg);
-            padding: 12px 24px;
-            border-radius: 14px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 14px;
-            transition: 0.2s ease;
-        }
-
-        .btn-link:hover { opacity: 0.9; transform: translateY(-1px); }
-
-        .reasons-grid {
+        .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 12px;
         }
 
-        .reason-card {
-            background: rgba(255, 227, 188, 0.03);
-            padding: 15px;
-            border-radius: 16px;
+        .card {
+            background: rgba(255, 227, 188, 0.02);
             border: 1px solid var(--outline);
+            border-radius: 14px;
+            padding: 16px;
+            transition: background 0.2s;
         }
 
-        .reason-card ul { list-style: none; font-size: 13px; opacity: 0.9; }
-        .reason-card li { margin-bottom: 5px; }
+        .card:hover { background: rgba(255, 227, 188, 0.05); }
 
-        @media (max-width: 600px) {
-            .reasons-grid { grid-template-columns: 1fr; }
-            header { padding: 0 20px; }
-            header.scrolled { padding: 0 15px; }
+        .card h3 {
+            font-size: 15px;
+            font-weight: 500;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card ul { list-style: none; }
+        .card li {
+            font-size: 13px;
+            color: var(--text-dim);
+            margin-bottom: 4px;
+        }
+        .card li:last-child { margin-bottom: 0; }
+        .card li b { color: var(--on-surface); }
+        .card p { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
+
+        .cmd {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            background: var(--primary-bg);
+            color: var(--primary);
+            padding: 1px 7px;
+            border-radius: 5px;
+            white-space: nowrap;
+        }
+
+        .cmd-block {
+            font-family: 'Courier New', monospace;
+            font-size: 13px;
+            background: rgba(0,0,0,0.2);
+            color: var(--primary);
+            padding: 12px 16px;
+            border-radius: 10px;
+            border: 1px solid var(--outline);
+            margin: 8px 0;
+            display: block;
+            line-height: 1.8;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+
+        .tag {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 2px 9px;
+            border-radius: 20px;
+        }
+
+        .tag-scam { background: rgba(255, 138, 128, 0.15); color: #FF8A80; }
+        .tag-warn { background: rgba(255, 213, 79, 0.15); color: #FFD54F; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary);
+            color: var(--bg);
+            padding: 13px 26px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 14px;
+            transition: 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 18px rgba(255, 227, 188, 0.15);
+        }
+
+        .btn:active { transform: translateY(0); }
+
+        footer {
+            margin-top: 40px;
+            padding: 20px 12px;
+            text-align: center;
+            border-top: 1px solid var(--outline);
+            font-size: 13px;
+            color: var(--text-dim);
+        }
+
+        footer a { color: var(--primary); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 640px) {
+            body { padding-top: 72px; }
+            header { height: 72px; padding: 0 16px; }
+            header.scrolled { height: 54px; }
+            .logo-svg { width: 90px; }
+            header.scrolled .logo-svg { width: 68px; }
+            .nav-link { font-size: 11px; padding: 5px 10px; }
+            .container { padding: 10px 8px 30px; }
+            section { padding: 18px; border-radius: 16px; }
+            .grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-<header id="main-header">
-    <img src="assets/logo.svg" alt="Node" class="logo-svg">
+<header id="header">
+    <img src="assets/logo.svg" alt="Node Base" class="logo-svg">
+    <nav aria-label="Навигация">
+        <a href="#chats" class="nav-link">Чаты</a>
+        <a href="#reasons" class="nav-link">Причины</a>
+        <a href="#rules" class="nav-link">Правила</a>
+        <a href="#admin" class="nav-link">Админам</a>
+    </nav>
 </header>
 
-<div class="container">
-    
-    <section>
-        <h2>🔗 Сетка чатов</h2>
-        <a href="https://t.me/addlist/DIg-BioodnBhMGFi" class="btn-link" target="_blank">ПРИСОЕДИНИТЬСЯ К NODE</a>
+<main class="container">
+
+    <section id="chats">
+        <h2 class="section-title">🔗 Сетка чатов</h2>
+        <p style="color: var(--text-dim); margin-bottom: 16px; font-size: 14px;">
+            Все чаты проекта в одном пакете.
+        </p>
+        <a href="https://t.me/addlist/DIg-BioodnBhMGFi" class="btn" target="_blank" rel="noopener noreferrer">
+            Присоединиться к NODE →
+        </a>
     </section>
 
-    <section>
-        <h2>⭐️ Причины для вноса</h2>
-        <div class="reasons-grid">
-            <div class="reason-card">
-                <h3 style="color: #FF8A80;">🔴 Скам (+1)</h3>
+    <section id="reasons">
+        <h2 class="section-title">⭐ Причины для вноса</h2>
+        <div class="grid">
+            <div class="card">
+                <h3 style="color: var(--scam);">🔴 Скам <span class="tag tag-scam">+1</span></h3>
                 <ul>
-                    <li><b>• Взлом:</b> Аккаунтов ТГ / Роблокс (хвастовство или услуги взлома).</li>
-                    <li><b>• Скам:</b> Адопт, ММ2, Арт, Позинг, НФТ, Звёзды, Робуксы, Аккаунты.</li>
-                    <li><b>• Фейк:</b> Гаранта, админа, владельца или диз-инфа на них.</li>
-                    <li><b>• Кража:</b> Чужие пруфы, чеки доната, фото инвентаря.</li>
+                    <li><b>• Взлом:</b> Аккаунтов ТГ / Роблокс</li>
+                    <li><b>• Скам:</b> Адопт, ММ2, Арт, Позинг, НФТ, Звёзды, Робуксы</li>
+                    <li><b>• Фейк:</b> Гаранта, админа, владельца</li>
+                    <li><b>• Кража:</b> Чужих пруфов, чеков, фото инвентаря</li>
                 </ul>
             </div>
-            <div class="reason-card">
-                <h3 style="color: #FFD54F;">🟡 Подозрения (0)</h3>
+            <div class="card">
+                <h3 style="color: var(--warn);">🟡 Подозрения <span class="tag tag-warn">0</span></h3>
                 <ul>
-                    <li><b>• Отказ от гаранта:</b> Или манипуляция ценой.</li>
-                    <li><b>• Сомнительно:</b> Траст-трейд, аренда, донат через пароль, прокачка.</li>
-                    <li><b>• Накрутка:</b> Взаимные отзывы, сделки < 10₽.</li>
-                    <li><b>• Взлом:</b> Обучение или просьба взломать.</li>
-                    <li><b>• Вирусы:</b> Распространение "читов" в ЛС.</li>
+                    <li><b>• Отказ от гаранта:</b> Или манипуляция ценой</li>
+                    <li><b>• Сомнительно:</b> Траст-трейд, аренда, донат через пароль</li>
+                    <li><b>• Накрутка:</b> Взаимные отзывы, сделки &lt; 10₽</li>
+                    <li><b>• Взлом:</b> Обучение или просьба взломать</li>
+                    <li><b>• Вирусы:</b> Распространение «читов» в ЛС</li>
                 </ul>
             </div>
         </div>
-        <div class="rule-item" style="margin-top: 15px; border-color: var(--primary); font-size: 13px;">
-            <b>Важно:</b> Требуем фулл переписку с переходом на профиль. Срок игнора от 3-х дней или 2 недели обещаний. Если на пруфах что-то замазано или обрезано — требуем оригинал без редактирования.
+        <div style="margin-top: 14px; padding: 12px 16px; background: var(--primary-bg); border-left: 3px solid var(--primary); border-radius: 0 10px 10px 0; font-size: 13px; color: var(--text-dim);">
+            <b style="color: var(--on-surface);">Важно:</b> Нужна полная переписка с переходом на профиль. Срок игнора — от 3 дней или 2 недели обещаний. Пруфы без редактирования.
         </div>
     </section>
 
-    <section>
-        <h2>💬 Правила чата "Node | Оффтоп"</h2>
-        <div class="rule-item">- Оффтоп — это свободное общение на любую тему.
-        - Запрещено: ЦП (детская порнография), расчленёнка, и слив личных данных — за это следует немедленный бан.
-        - За сильный спам (≥10 сообщений за 5 с) — мут.
-        - Администрация принимает решения для поддержания порядка, чтобы чат соответствовал правилам и оставался пригодным для общения.</div>
+    <section id="rules">
+        <h2 class="section-title">📜 Правила чатов</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>💬 Оффтоп</h3>
+                <p>Свободное общение на любую тему.</p>
+                <ul style="margin-top: 8px;">
+                    <li>❌ ЦП, расчленёнка, слив личных данных — <b>бан</b></li>
+                    <li>❌ Спам (≥10 сообщ. за 5 с) — <b>мут</b></li>
+                    <li>Администрация следит за порядком</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>📥 Предложка</h3>
+                <p>Чат для слива скамеров.</p>
+                <ul style="margin-top: 8px;">
+                    <li>Закрывается на ночь, открывается утром</li>
+                    <li>Оффтоп → варн. 2 варна → мут 24ч</li>
+                    <li>Вызов админа: <span class="cmd">/report причина</span></li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>⚖️ Суд</h3>
+                <p>Обжалование добавления в базу.</p>
+                <ul style="margin-top: 8px;">
+                    <li>Уважение к судьям</li>
+                    <li>Писать только по делу</li>
+                    <li>Полные доказательства невиновности</li>
+                    <li>❌ Контент 18+ — риск бана</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>⚠️ Наказания</h3>
+                <p>За нарушение правил любого чата:</p>
+                <ul style="margin-top: 8px;">
+                    <li><span class="tag tag-warn">Варн</span> — предупреждение</li>
+                    <li><span class="tag tag-warn">Мут</span> — ограничение письма</li>
+                    <li><span class="tag tag-scam">Бан</span> — полная блокировка</li>
+                </ul>
+            </div>
+        </div>
     </section>
 
-    <section>
-        <h2>📥 Правила чата "Предложка (Слив скамеров)"</h2>
-        <div class="rule-item">Предложка — это чат, в котором вы можете слить скамера / мутную личность.
-        1. Предложка закрывается на ночь, и открывается утром.
-        2. Оффтоп карается предупреждением. Если вы набираете 2 преда, вы получаете мут на 24 часа.
-        3. Если вы мешаете админам выполнять свою работу, вы можете быть заблокированы в этом чате.
-
-        Позвать админов можно командой <b style="color:var(--primary)">/report причина</b> ответом на сообщение. Незнание правил не лишает ответственности.</div>
+    <section id="admin">
+        <h2 class="section-title">📘 Правила для админов</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>⚠️ Система админ-варнов</h3>
+                <ul>
+                    <li>Ошибки в добавлениях / нарушение регламента → админ-варн</li>
+                    <li><b>Испытательный срок:</b> макс. <b>2</b> варна</li>
+                    <li><b>Администратор:</b> макс. <b>5</b> варнов</li>
+                    <li>+1 лимит за каждые 1000 успешных добавлений</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>📋 Категории причин</h3>
+                <ul>
+                    <li><span class="tag tag-scam">1</span> — главные: кредит, вирусы, взлом, фейк (один раз)</li>
+                    <li><span class="tag tag-scam">1+</span> — суммируются: скам на Adopt, MM2, робуксы и т.д.</li>
+                    <li><span class="tag tag-warn">0</span> — без счёта: просьбы, отказ от гаранта, сомнительные услуги, диз-инфа</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🔍 Проверка пруфов</h3>
+                <ul>
+                    <li>Переписка без обрезок и замазок</li>
+                    <li>Скриншот трейда / чек перевода</li>
+                    <li>Блок или игнор от 3 дней (или 2 нед. обещаний)</li>
+                    <li>ГС → пересыл в ПД или видео с экрана</li>
+                    <li>В переписке виден профиль скамера</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🛡️ Подделки и ссылки</h3>
+                <ul>
+                    <li>Украденные пруфы → ссылка на оригинал</li>
+                    <li>Накрутка: ириски (от 5), замазанные ники (от 10), сделки до 10₽ (от 10)</li>
+                    <li>Оригинальные домены: только <b>roblox.com</b>, <b>web.roblox.com</b></li>
+                    <li>Всё остальное — фишинг</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🏢 Работа в предложке</h3>
+                <ul>
+                    <li>Работа начинается с «беру сит» в ответ на закреп</li>
+                    <li>Ситуации разбираются сверху вниз, запрещено брать чужую работу</li>
+                    <li>Перед <span class="cmd">/add</span> пруфы пересылаются в отдельный канал, обязателен скрин профиля</li>
+                    <li><span class="cmd">/offline</span> при перерыве, <span class="cmd">/night</span> / <span class="cmd">/day</span> для закрытия ПД</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>📌 Особые случаи</h3>
+                <ul>
+                    <li><b>Твинк:</b> перенос всех причин на новый акк + «попытка ухода» (0)</li>
+                    <li><b>Старая БД:</b> устаревшие причины заменяются на актуальные из FAQ через куратора</li>
+                    <li>За 3 дня испытательного срока — <b>50 ситов</b></li>
+                </ul>
+            </div>
+        </div>
     </section>
 
-    <section>
-        <h2>⚖️ Правила чата "суд"</h2>
-        <div class="rule-item" style="border: none; padding-left: 0;">ВНИМАНИЕ-ВНИМАНИЕ!
-        Всем приготовиться и сесть на свои места. Идёт судебный процесс.
+</main>
 
-        Суд — это место для тех, кто считает свое добавление ошибочным. Он никак не связан с реальным судом. Здесь вы можете обжаловать свое добавление в базу, если считаете, что имеете право на вынос из неё. Но помните! Окончательное решение остаётся за судом.
-
-        Во время судебного процесса просим придерживаться этих правил:
-        <b>Уважение к судьям.</b> Давайте проявлять взаимное уважение. Судьи уважают вас, а вы, будьте добры, уважать их, хотя бы в пределах суда. Не стоит хамить, грубить, оскорблять и прочее, что можно счесть за неуважение.
-
-        <b>Сюда писать только по делу.</b> Никаких сообщений здесь не касающихся дела быть не должно. Трейды, поиск чего-либо, общение и прочее, что не касается суда — оставляйте за его пределами в другие чаты.
-
-        <b>Имейте полные доказательства</b>, чтобы оправдать себя. Если вы и вправду желаете выйти, приготовьтесь предъявлять в случае чего доказательства на то, что вы невиновны, поскольку у нас без доказательств людей не вносят.
-
-        <b>Особенно выделим контент 18+.</b> За использование стикеров, эмодзи, картинок, видео и в принципе общение — вы рискуете получить бан. Помните, что суд — это не шутки.
-
-        <span class="important">ЗА НАРУШЕНИЕ ЭТИХ ПРАВИЛ ВЫ МОЖЕТЕ ПОЛУЧИТЬ ЛЮБОЕ НАКАЗАНИЕ ИЗ НИЖЕ ПЕРЕЧИСЛЕННЫХ:</span>
-        Варн, Мут, Бан. На усмотрение администрации.</div>
-    </section>
-
-</div>
+<footer>
+    <p>© Node Base</p>
+</footer>
 
 <script>
-    const header = document.getElementById('main-header');
+    const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
-        if (window.scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
+        header.classList.toggle('scrolled', window.scrollY > 50);
+    }, { passive: true });
 </script>
 
 </body>
