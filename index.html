@@ -3,29 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NODE BASE — официальный сайт</title>
-    <meta name="description" content="Node Base — сообщество по борьбе со скамом. База данных скамеров, правила чатов, обучение администрации.">
+    <title>NODE BASE</title>
+    <meta name="description" content="Node Base — сообщество по борьбе со скамом.">
     <meta property="og:title" content="NODE BASE">
-    <meta property="og:description" content="Сообщество по борьбе со скамом. База данных мошенников, правила и обучение администрации.">
+    <meta property="og:description" content="Сообщество по борьбе со скамом.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://node.twinkvibe.gay">
     <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #FFE3BC;
-            --primary-bg: rgba(255, 227, 188, 0.06);
             --bg: #1A1712;
             --surface: #2D2820;
-            --on-surface: #E6E1D9;
-            --text-dim: #A0988A;
-            --outline: #4F4539;
-            --error: #FFB4AB;
-            --scam: #FF8A80;
-            --warn: #FFD54F;
-            --radius: 20px;
+            --text: #E6E1D9;
+            --dim: #A0988A;
+            --line: #4F4539;
+            --red: #FF8A80;
+            --yellow: #FFD54F;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -34,10 +31,9 @@
 
         body {
             background: var(--bg);
-            color: var(--on-surface);
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.6;
-            padding-top: 82px;
+            color: var(--text);
+            font: 400 14px/1.5 'Roboto', sans-serif;
+            padding-top: 64px;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
@@ -45,195 +41,203 @@
 
         :focus-visible {
             outline: 2px solid var(--primary);
-            outline-offset: 3px;
+            outline-offset: 2px;
             border-radius: 4px;
         }
 
         header {
             position: fixed;
             top: 0; left: 0; right: 0;
-            height: 82px;
-            padding: 0 40px;
+            height: 64px;
+            padding: 0 24px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid var(--outline);
-            background: rgba(26, 23, 18, 0.96);
-            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--line);
+            background: rgba(26, 23, 18, 0.97);
+            backdrop-filter: blur(12px);
             z-index: 1000;
-            transition: height 0.3s ease;
+            transition: height 0.25s;
         }
 
-        header.scrolled { height: 58px; }
+        header.scrolled { height: 50px; }
 
         .logo-svg {
-            width: 120px;
+            width: 90px;
             height: auto;
-            transition: width 0.3s ease;
+            transition: width 0.25s;
         }
 
-        header.scrolled .logo-svg { width: 80px; }
+        header.scrolled .logo-svg { width: 66px; }
 
-        nav { display: flex; gap: 4px; }
+        nav { display: flex; gap: 2px; }
 
         .nav-link {
-            color: var(--text-dim);
+            color: var(--dim);
             text-decoration: none;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 500;
-            padding: 6px 14px;
-            border-radius: 20px;
+            padding: 5px 12px;
+            border-radius: 16px;
             transition: 0.2s;
-            white-space: nowrap;
         }
 
         .nav-link:hover {
             color: var(--primary);
-            background: var(--primary-bg);
+            background: rgba(255, 227, 188, 0.08);
         }
 
         .container {
-            max-width: 740px;
+            max-width: 720px;
             margin: 0 auto;
-            padding: 16px 12px 40px;
+            padding: 12px 12px 24px;
             flex: 1;
         }
 
         section {
-            margin-top: 20px;
+            margin-top: 12px;
             background: var(--surface);
-            border-radius: var(--radius);
-            padding: 24px;
-            border: 1px solid var(--outline);
-            transition: border-color 0.2s;
+            border-radius: 16px;
+            padding: 18px 20px;
+            border: 1px solid var(--line);
         }
 
         section:target { border-color: var(--primary); }
 
-        .section-title {
+        .s-title {
             color: var(--primary);
-            font-size: 20px;
+            font-size: 17px;
             font-weight: 600;
-            margin-bottom: 16px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            margin-bottom: 12px;
         }
 
         .grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 12px;
+            gap: 10px;
         }
 
         .card {
-            background: rgba(255, 227, 188, 0.02);
-            border: 1px solid var(--outline);
-            border-radius: 14px;
-            padding: 16px;
-            transition: background 0.2s;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 14px;
         }
-
-        .card:hover { background: rgba(255, 227, 188, 0.05); }
 
         .card h3 {
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
         }
 
-        .card ul { list-style: none; }
+        .card p {
+            font-size: 13px;
+            color: var(--dim);
+            margin-bottom: 6px;
+        }
+
+        .card p:last-child { margin-bottom: 0; }
+
         .card li {
             font-size: 13px;
-            color: var(--text-dim);
-            margin-bottom: 4px;
+            color: var(--dim);
+            margin-bottom: 3px;
+            list-style: none;
+            padding-left: 14px;
+            position: relative;
         }
+
+        .card li::before {
+            content: '—';
+            position: absolute;
+            left: 0;
+            color: var(--line);
+        }
+
         .card li:last-child { margin-bottom: 0; }
-        .card li b { color: var(--on-surface); }
-        .card p { font-size: 13px; color: var(--text-dim); line-height: 1.5; }
-
-        .cmd {
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            background: var(--primary-bg);
-            color: var(--primary);
-            padding: 1px 7px;
-            border-radius: 5px;
-            white-space: nowrap;
-        }
-
-        .cmd-block {
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            background: rgba(0,0,0,0.2);
-            color: var(--primary);
-            padding: 12px 16px;
-            border-radius: 10px;
-            border: 1px solid var(--outline);
-            margin: 8px 0;
-            display: block;
-            line-height: 1.8;
-            white-space: pre-wrap;
-            overflow-x: auto;
-        }
+        .card li b { color: var(--text); }
 
         .tag {
             display: inline-block;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 700;
-            padding: 2px 9px;
+            padding: 1px 8px;
             border-radius: 20px;
+            letter-spacing: 0.3px;
         }
 
-        .tag-scam { background: rgba(255, 138, 128, 0.15); color: #FF8A80; }
-        .tag-warn { background: rgba(255, 213, 79, 0.15); color: #FFD54F; }
+        .tag-r { background: rgba(255, 138, 128, 0.15); color: var(--red); }
+        .tag-y { background: rgba(255, 213, 79, 0.15); color: var(--yellow); }
+
+        .cmd {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            background: rgba(255, 227, 188, 0.08);
+            color: var(--primary);
+            padding: 1px 6px;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
 
         .btn {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             background: var(--primary);
             color: var(--bg);
-            padding: 13px 26px;
-            border-radius: 12px;
+            padding: 10px 22px;
+            border-radius: 10px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 14px;
+            font-size: 13px;
             transition: 0.2s;
         }
 
         .btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 18px rgba(255, 227, 188, 0.15);
+            transform: translateY(-1px);
+            box-shadow: 0 4px 14px rgba(255, 227, 188, 0.12);
         }
 
-        .btn:active { transform: translateY(0); }
+        .bar {
+            height: 1px;
+            background: var(--line);
+            margin: 14px 0;
+        }
+
+        .note {
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: rgba(255, 227, 188, 0.06);
+            border-left: 3px solid var(--primary);
+            border-radius: 0 8px 8px 0;
+            font-size: 13px;
+            color: var(--dim);
+        }
+
+        .note b { color: var(--text); }
 
         footer {
-            margin-top: 40px;
-            padding: 20px 12px;
+            padding: 16px 12px;
             text-align: center;
-            border-top: 1px solid var(--outline);
-            font-size: 13px;
-            color: var(--text-dim);
+            border-top: 1px solid var(--line);
+            font-size: 12px;
+            color: var(--dim);
         }
 
-        footer a { color: var(--primary); text-decoration: none; }
-        footer a:hover { text-decoration: underline; }
-
         @media (max-width: 640px) {
-            body { padding-top: 72px; }
-            header { height: 72px; padding: 0 16px; }
-            header.scrolled { height: 54px; }
-            .logo-svg { width: 90px; }
-            header.scrolled .logo-svg { width: 68px; }
-            .nav-link { font-size: 11px; padding: 5px 10px; }
-            .container { padding: 10px 8px 30px; }
-            section { padding: 18px; border-radius: 16px; }
+            body { padding-top: 56px; }
+            header { height: 56px; padding: 0 14px; }
+            header.scrolled { height: 46px; }
+            .logo-svg { width: 72px; }
+            header.scrolled .logo-svg { width: 56px; }
+            .nav-link { font-size: 11px; padding: 4px 10px; }
+            .container { padding: 8px 8px 16px; }
+            section { padding: 14px 16px; border-radius: 14px; margin-top: 8px; }
+            .s-title { font-size: 16px; }
             .grid { grid-template-columns: 1fr; }
+            .card { padding: 12px; }
         }
     </style>
 </head>
@@ -241,7 +245,7 @@
 
 <header id="header">
     <img src="assets/logo.svg" alt="Node Base" class="logo-svg">
-    <nav aria-label="Навигация">
+    <nav>
         <a href="#chats" class="nav-link">Чаты</a>
         <a href="#reasons" class="nav-link">Причины</a>
         <a href="#rules" class="nav-link">Правила</a>
@@ -251,141 +255,165 @@
 
 <main class="container">
 
+    <!-- Чаты -->
     <section id="chats">
-        <h2 class="section-title">🔗 Сетка чатов</h2>
-        <p style="color: var(--text-dim); margin-bottom: 16px; font-size: 14px;">
-            Все чаты проекта в одном пакете.
-        </p>
+        <h2 class="s-title">🔗 Сетка чатов</h2>
+        <p style="color: var(--dim); margin-bottom: 14px;">Все чаты проекта в одном пакете.</p>
         <a href="https://t.me/addlist/DIg-BioodnBhMGFi" class="btn" target="_blank" rel="noopener noreferrer">
             Присоединиться к NODE →
         </a>
     </section>
 
+    <!-- Причины -->
     <section id="reasons">
-        <h2 class="section-title">⭐ Причины для вноса</h2>
+        <h2 class="s-title">⭐ Причины для вноса</h2>
+
         <div class="grid">
             <div class="card">
-                <h3 style="color: var(--scam);">🔴 Скам <span class="tag tag-scam">+1</span></h3>
-                <ul>
-                    <li><b>• Взлом:</b> Аккаунтов ТГ / Роблокс</li>
-                    <li><b>• Скам:</b> Адопт, ММ2, Арт, Позинг, НФТ, Звёзды, Робуксы</li>
-                    <li><b>• Фейк:</b> Гаранта, админа, владельца</li>
-                    <li><b>• Кража:</b> Чужих пруфов, чеков, фото инвентаря</li>
-                </ul>
+                <h3 style="color: var(--red);"><span class="tag tag-r">1</span>Главные (один раз)</h3>
+                <p>Кредит на номера (МТС / Теле2 / Мегафон), распространение вирусов (инжекторы, читы), взлом ТГ / Роблокс, фейк гаранта / админа / владельца / бота.</p>
             </div>
             <div class="card">
-                <h3 style="color: var(--warn);">🟡 Подозрения <span class="tag tag-warn">0</span></h3>
-                <ul>
-                    <li><b>• Отказ от гаранта:</b> Или манипуляция ценой</li>
-                    <li><b>• Сомнительно:</b> Траст-трейд, аренда, донат через пароль</li>
-                    <li><b>• Накрутка:</b> Взаимные отзывы, сделки &lt; 10₽</li>
-                    <li><b>• Взлом:</b> Обучение или просьба взломать</li>
-                    <li><b>• Вирусы:</b> Распространение «читов» в ЛС</li>
-                </ul>
+                <h3 style="color: var(--red);"><span class="tag tag-r">1+</span>Суммируемые (каждый раз +1)</h3>
+                <p>Скам на Adopt Me / MM2 / PSX / Сонарию / Арты / Позинг / Канал / Валюту / Робуксы / Коды / Звёзды / ТГ / Роблокс аккаунт. Взлом-ссылка / Фишинг.</p>
             </div>
-        </div>
-        <div style="margin-top: 14px; padding: 12px 16px; background: var(--primary-bg); border-left: 3px solid var(--primary); border-radius: 0 10px 10px 0; font-size: 13px; color: var(--text-dim);">
-            <b style="color: var(--on-surface);">Важно:</b> Нужна полная переписка с переходом на профиль. Срок игнора — от 3 дней или 2 недели обещаний. Пруфы без редактирования.
+            <div class="card">
+                <h3 style="color: var(--yellow);"><span class="tag tag-y">0</span>Информационные (без счёта)</h3>
+                <p>Попытка скама, отказ от гаранта (прямой / свой НН-гарант / повышение цены), сомнительные услуги (донат через пароль / траст-трейд / аренда / прокачка / фриланс), фейк/кража пруфов/инвентаря, накрученные пруфы, сотрудничество в скаме/взломе, диз-информация, просьба/обучение взлому, попытка ухода с базы (твинк).</p>
+            </div>
         </div>
     </section>
 
+    <!-- Правила чатов -->
     <section id="rules">
-        <h2 class="section-title">📜 Правила чатов</h2>
+        <h2 class="s-title">📜 Правила чатов</h2>
         <div class="grid">
             <div class="card">
                 <h3>💬 Оффтоп</h3>
-                <p>Свободное общение на любую тему.</p>
-                <ul style="margin-top: 8px;">
-                    <li>❌ ЦП, расчленёнка, слив личных данных — <b>бан</b></li>
-                    <li>❌ Спам (≥10 сообщ. за 5 с) — <b>мут</b></li>
-                    <li>Администрация следит за порядком</li>
-                </ul>
+                <p>Свободное общение. ❌ ЦП, расчленёнка, слив данных — <b>бан</b>. Спам (≥10 за 5 с) — <b>мут</b>.</p>
             </div>
             <div class="card">
                 <h3>📥 Предложка</h3>
-                <p>Чат для слива скамеров.</p>
-                <ul style="margin-top: 8px;">
-                    <li>Закрывается на ночь, открывается утром</li>
-                    <li>Оффтоп → варн. 2 варна → мут 24ч</li>
-                    <li>Вызов админа: <span class="cmd">/report причина</span></li>
-                </ul>
+                <p>Чат для отправки информации о скамерах. Закрывается на ночь. Оффтоп → варн, 2 варна → мут 24 ч. Вызов админа: <span class="cmd">/report причина</span>.</p>
             </div>
             <div class="card">
                 <h3>⚖️ Суд</h3>
-                <p>Обжалование добавления в базу.</p>
-                <ul style="margin-top: 8px;">
-                    <li>Уважение к судьям</li>
-                    <li>Писать только по делу</li>
-                    <li>Полные доказательства невиновности</li>
-                    <li>❌ Контент 18+ — риск бана</li>
-                </ul>
+                <p>Обжалование добавления в базу. Уважение к судьям, только по делу, полные доказательства. ❌ 18+.</p>
             </div>
             <div class="card">
                 <h3>⚠️ Наказания</h3>
-                <p>За нарушение правил любого чата:</p>
-                <ul style="margin-top: 8px;">
-                    <li><span class="tag tag-warn">Варн</span> — предупреждение</li>
-                    <li><span class="tag tag-warn">Мут</span> — ограничение письма</li>
-                    <li><span class="tag tag-scam">Бан</span> — полная блокировка</li>
-                </ul>
+                <p><span class="tag tag-y">Варн</span> — предупреждение · <span class="tag tag-y">Мут</span> — ограничение · <span class="tag tag-r">Бан</span> — блокировка.</p>
             </div>
         </div>
     </section>
 
+    <!-- Админам -->
     <section id="admin">
-        <h2 class="section-title">📘 Правила для админов</h2>
+        <h2 class="s-title">📘 Для администрации</h2>
+
         <div class="grid">
             <div class="card">
-                <h3>⚠️ Система админ-варнов</h3>
+                <h3>🟢 Начало смены</h3>
                 <ul>
-                    <li>Ошибки в добавлениях / нарушение регламента → админ-варн</li>
-                    <li><b>Испытательный срок:</b> макс. <b>2</b> варна</li>
-                    <li><b>Администратор:</b> макс. <b>5</b> варнов</li>
-                    <li>+1 лимит за каждые 1000 успешных добавлений</li>
+                    <li>«беру сит» в ответ на последний закреп</li>
+                    <li>Если в закрепе <span class="cmd">доразобрать:</span> ссылка — перейти и разбирать оттуда</li>
+                    <li>Строго сверху вниз, на каждый сит — «беру»</li>
                 </ul>
             </div>
             <div class="card">
-                <h3>📋 Категории причин</h3>
+                <h3>🔚 Завершение смены</h3>
                 <ul>
-                    <li><span class="tag tag-scam">1</span> — главные: кредит, вирусы, взлом, фейк (один раз)</li>
-                    <li><span class="tag tag-scam">1+</span> — суммируются: скам на Adopt, MM2, робуксы и т.д.</li>
-                    <li><span class="tag tag-warn">0</span> — без счёта: просьбы, отказ от гаранта, сомнительные услуги, диз-инфа</li>
+                    <li><span class="cmd">/offline всё разобрано</span> после разбора</li>
+                    <li>При перерыве ≥10 мин — указать следующий сит</li>
+                    <li><span class="cmd">/night</span> (закрыть), <span class="cmd">/day</span> (открыть)</li>
                 </ul>
             </div>
             <div class="card">
-                <h3>🔍 Проверка пруфов</h3>
+                <h3>🔍 Разбор ситуации</h3>
                 <ul>
-                    <li>Переписка без обрезок и замазок</li>
-                    <li>Скриншот трейда / чек перевода</li>
-                    <li>Блок или игнор от 3 дней (или 2 нед. обещаний)</li>
-                    <li>ГС → пересыл в ПД или видео с экрана</li>
-                    <li>В переписке виден профиль скамера</li>
+                    <li>Скрин сообщения + профиля отправителя (с ID)</li>
+                    <li>При соответствии — пруфы в канал доказательств (скрины + подпись с ID)</li>
+                    <li>Внос: <span class="cmd">/add ID [кол-во] [причина] [ссылка]</span></li>
                 </ul>
             </div>
             <div class="card">
-                <h3>🛡️ Подделки и ссылки</h3>
+                <h3>🛡️ Модерация</h3>
                 <ul>
-                    <li>Украденные пруфы → ссылка на оригинал</li>
-                    <li>Накрутка: ириски (от 5), замазанные ники (от 10), сделки до 10₽ (от 10)</li>
-                    <li>Оригинальные домены: только <b>roblox.com</b>, <b>web.roblox.com</b></li>
-                    <li>Всё остальное — фишинг</li>
+                    <li><span class="cmd">/warn</span> за нарушение (ответом на сообщение)</li>
+                    <li>2 варна → автому</li>
+                    <li>Репорт: перейти по ссылке → /warn → «Просмотрено»</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="note">
+            <b>Правило 2 админов:</b> в предложке минимум 2 админа для объективной оценки.
+        </div>
+
+        <div class="bar"></div>
+
+        <h3 style="font-size: 14px; font-weight: 500; margin-bottom: 10px;">📋 Категории причин</h3>
+
+        <div class="grid">
+            <div class="card">
+                <h3><span class="tag tag-r">1</span> +1 (один раз)</h3>
+                <ul>
+                    <li><b>Кредит на номера</b> — МТС / Теле2 / Мегафон</li>
+                    <li><b>Вирусы</b> — инжекторы, читы, вредоносные программы</li>
+                    <li><b>Взлом</b> — ТГ / Роблокс аккаунта</li>
+                    <li><b>Фейк</b> — гаранта / бывшего / скам-гаранта / админа / владельца / бота</li>
                 </ul>
             </div>
             <div class="card">
-                <h3>🏢 Работа в предложке</h3>
+                <h3><span class="tag tag-r">1+</span> +1 (каждый раз)</h3>
                 <ul>
-                    <li>Работа начинается с «беру сит» в ответ на закреп</li>
-                    <li>Ситуации разбираются сверху вниз, запрещено брать чужую работу</li>
-                    <li>Перед <span class="cmd">/add</span> пруфы пересылаются в отдельный канал, обязателен скрин профиля</li>
-                    <li><span class="cmd">/offline</span> при перерыве, <span class="cmd">/night</span> / <span class="cmd">/day</span> для закрытия ПД</li>
+                    <li><b>Скам на:</b> Adopt Me / MM2 / PSX / Сонарию / Арты / Позинг / Канал / Валюту / Робуксы / Коды / Звёзды / ТГ / Роблокс</li>
+                    <li><b>Взлом-ссылка / Фишинг</b> — скрытые ссылки, QR-коды</li>
                 </ul>
             </div>
             <div class="card">
-                <h3>📌 Особые случаи</h3>
+                <h3><span class="tag tag-y">0</span> +0 (информационные)</h3>
                 <ul>
-                    <li><b>Твинк:</b> перенос всех причин на новый акк + «попытка ухода» (0)</li>
-                    <li><b>Старая БД:</b> устаревшие причины заменяются на актуальные из FAQ через куратора</li>
-                    <li>За 3 дня испытательного срока — <b>50 ситов</b></li>
+                    <li><b>Попытка скама</b> — на всё из 1+ / фото из сети / через фейк гаранта</li>
+                    <li><b>Отказ от гаранта</b> — прямой / повышение цены / свой НН-гарант</li>
+                    <li><b>Сомнительные услуги</b> — донат через пароль / траст-трейд / аренда ТГ/ВК/ВЦ/MAX / прокачка / фриланс</li>
+                    <li><b>Фейк / кража</b> — чека, пруфов, инвентаря</li>
+                    <li><b>Обучение взлому</b> — просьба / обучение</li>
+                    <li><b>Сотрудничество</b> — в скаме / во взломе</li>
+                    <li><b>Диз-информация</b> — на админа / гаранта / владельца</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>📐 Требования к пруфам</h3>
+                <ul>
+                    <li>Скрины полные, без обрезок и замазок</li>
+                    <li>Полная переписка, факт сделки (скрин трейда / чек)</li>
+                    <li>Финал: блок / игнор от 3 дней (или 2 нед. обещаний)</li>
+                    <li>ГС: пересыл или видео с экрана. Профиль скамера виден</li>
+                    <li><b>Накрутка:</b> перескоки нумерации, замазанные ники (≥10), отзывы на игровые валюты (≥5), сделки до 10₽ (≥10)</li>
+                    <li><b>Домены:</b> только roblox.com / www.roblox.com / web.roblox.com — остальное фишинг</li>
+                    <li>Фишинг: <span class="cmd">/scam_link</span> + <span class="cmd">/add</span> «Взлом ссылка»</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="bar"></div>
+
+        <div class="grid">
+            <div class="card">
+                <h3>⚠️ Наказания АБ</h3>
+                <ul>
+                    <li>Ошибка при добавлении → админ-варн</li>
+                    <li><b>Испыту:</b> макс. 2 варна (при втором — снятие)</li>
+                    <li><b>Админ:</b> макс. 5 варнов (+1 за 1000 добавлений)</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>🎯 Испытательный срок</h3>
+                <ul>
+                    <li><b>50 ситов</b> за <b>3 дня</b></li>
+                    <li>Лимиты: Фейки — 15, Отказ от гаранта — 15, Сомнительные услуги — 10, Взлом — 10</li>
+                    <li>Ситы сверх лимита не учитываются</li>
                 </ul>
             </div>
         </div>
@@ -393,15 +421,11 @@
 
 </main>
 
-<footer>
-    <p>© Node Base</p>
-</footer>
+<footer>© Node Base</footer>
 
 <script>
     const header = document.getElementById('header');
-    window.addEventListener('scroll', () => {
-        header.classList.toggle('scrolled', window.scrollY > 50);
-    }, { passive: true });
+    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50), { passive: true });
 </script>
 
 </body>
